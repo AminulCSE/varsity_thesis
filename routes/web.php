@@ -1,10 +1,24 @@
 <?php
 use Illuminate\Support\Facades\Route;
-
 // -----------------------Frontend route here-----------------------
 Route::get('/', 'FrontendController@index');
 // Product details
 Route::get('product_details/{id}', 'FrontendController@product_details');
+
+
+
+// User Profile route here
+// -----------------------HomeController route here-----------------------
+// Route::get('user_home', 'HomeController@userHome')->name('user.home');
+Route::get('user/home', 'HomeController@userHome')->name('user.home');
+Route::get('user/user_edit/{id}', 'HomeController@editUser');
+Route::post('user/user_update/{id}', 'HomeController@updateUser');
+
+// CHange password for user
+Route::get('user/change_userpass/{id}', 'HomeController@editpassword');
+Route::post('user/update_password/{id}', 'HomeController@updatepassword');
+
+
 
 // Blog details
 Route::get('blog_details/{id}', 'FrontendController@blog_details');
@@ -21,9 +35,6 @@ Route::get('show_product_by_category/{id}', 'FrontendController@show_product_by_
 Route::get('show_product_by_category/{id}/{subcatid}', 'FrontendController@show_product_by_cat_subcat');
 
 
-// -----------------------HomeController route here-----------------------
-Route::get('user_home', 'HomeController@userHome')->name('user.home');
-
 // -----------------------Backend route here------------------------->middleware('is_admin');
 Auth::routes();
 Route::middleware('is_admin')->group(function (){
@@ -38,6 +49,8 @@ Route::middleware('is_admin')->group(function (){
 	Route::get('category/edit_category/{id}', 'admin\CategoryController@editCategroy');
 	Route::post('category/update_category/{id}', 'admin\CategoryController@updateCategory');
 	Route::get('category/delete_category/{id}', 'admin\CategoryController@deleteCategory');
+
+	
 
 
 	// SubCategory route here

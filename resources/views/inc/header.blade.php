@@ -45,7 +45,19 @@
             <li><a href="{{ url('showcart') }}"><i class="icon fa fa-shopping-cart"></i>কার্ট</a></li>
             <li><a href="#"><i class="icon fa fa-check"></i>চেকআউট</a></li>
             @if(@Auth::check())
-            <li><a href=""><i class="icon fa fa-user"></i>আমার একাউন্ট</a></li>
+            <li>
+              <a href="{{ route('user.home') }}">
+                <img src="{{ (!empty(Auth::user()->image))?url(Auth::user()->image):url('public/frontend/images/noimage.jpg') }}" style="height: 20px; width: 25px; border-radius: 50%;">
+                  @php echo Auth::user()->name;@endphp
+              </a>
+            </li>
+
+            <li>
+              <a href="{{ url('user/order/'.Auth::user()->id) }}">
+                <i class="icon fa fa-shopping-cart"></i>অর্ডার
+              </a>
+            </li>
+
             <li>
               <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 <i class="icon fa fa-lock"></i>লগ আউট

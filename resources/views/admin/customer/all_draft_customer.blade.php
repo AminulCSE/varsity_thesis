@@ -64,7 +64,14 @@
 
                                             </td>
 
-                                            <td>{{ $customer_row->created_at }}</td>
+                                            <td>
+                                                @php
+                                                    $created = new Carbon\Carbon($customer_row->created_at);
+                                                    $now = Carbon\Carbon::now();
+                                                    $diff = ($created->diff($now)->days <1 )?'Today':$created->diffForHumans($now);
+                                                @endphp
+                                                {{ $diff }}
+                                            </td>
 
 
                                             <td>
