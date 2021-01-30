@@ -1,5 +1,18 @@
 @extends('layouts.frontapp')
 @section('content')
+
+
+@if(session()->has('success'))
+<div class="alert alert-success text-center">
+    {{ session()->get('success') }}
+</div>
+@endif
+
+@if(session()->has('error'))
+<div class="alert alert-danger text-center">
+    {{ session()->get('error') }}
+</div>
+@endif
       <div class="col-md-1"></div>
       <div class="col-xs-12 col-sm-12 col-md-10 homebanner-holder"> 
                   <div class="detail-block">
@@ -63,9 +76,14 @@
                                 <form action="{{ url('add_to_cart/'.$product_details->id) }}" method="POST" enctype="multipart/form-data">
                                   @csrf
                                   <input type="hidden" name="product_name" value="{{ $product_details->product_name }}">
+
                                   <input type="hidden" name="id" value="{{ $product_details->id }}">
+                                  <input type="hidden" name="size" value="{{ $product_details->size }}">
+
                                   <input type="hidden" name="price" value="{{ $product_details->price }}">
+
                                   <input type="hidden" name="image1" value="{{ $product_details->image1 }}">
+                                  
                                   <input type="hidden" name="product_code" value="{{ $product_details->product_code }}">
 
                                   <h1 class="name">{{ $product_details->product_name }}</h1>
@@ -84,6 +102,10 @@
                                   </div><!-- /.description-container -->
 
                                   <div class="description-container m-t-20">
+                                      <p class="size" style="font-weight: bold;">{{ $product_details->size }}</p>
+                                  </div>
+
+                                  <div class="description-container m-t-20">
                                       <p class="price">৳{{ $product_details->price }}</p>
                                   </div>
 
@@ -96,7 +118,7 @@
                                               <button type="submit" class="btn btn-primary"><i class="fa fa-shopping-cart inner-right-vs"></i>এড টু কার্ট</button>
 
                                                   <li class="add-cart-button btn-group">
-                                                    <a href="" class="btn btn-primary icon" type="button"><i class="icon fa fa-heart"></i>
+                                                    <a href="{{ url('add_to_wishlist/'.$product_details->id) }}" class="btn btn-primary icon" type="button"><i class="icon fa fa-heart"></i>
                                                     </a>
                                                   </li>
                                           </div>
@@ -151,7 +173,7 @@
                                               <i class="fa fa-shopping-cart"></i>
                                             </a>
                                           </li>
-                                          <li class="lnk wishlist"> <a class="add-to-cart" href="detail.html" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
+                                          <li class="lnk wishlist"> <a class="add-to-cart" href="{{ url('add_to_wishlist/'.$product_row->id) }}" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
                                         </ul>
                                       </div>
                                       <!-- /.action --> 

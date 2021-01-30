@@ -5,6 +5,7 @@ use DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Blog;
+use Illuminate\Support\Facades\Auth;
 class BlogController extends Controller
 {
     public function __construct()
@@ -24,13 +25,15 @@ class BlogController extends Controller
     public function storeBlog(Request $request){
     	$validatedData = $request->validate([
 	        'title'			=> 'required|min:5',
-	        'description'	=> 'required|max:250|min:2',
+	        'description'	=> 'required|min:2',
 	        'image' 	  	=> 'required|image|mimes:jpeg,png,PNG,JPG,jpg,gif|max:2048'
     	]);
 
 	    $slider = new Blog;
 	    $slider->title			= $request->title;
 	    $slider->description	= $request->description;
+        $slider->user_id        = Auth::user()->id;
+
 	    $image                  = $request->file('image');
             $image_name         = hexdec(uniqid());
             $ext                = strtolower($image->getClientOriginalExtension());
@@ -53,7 +56,7 @@ class BlogController extends Controller
     	$validatedData = $request->validate([
 	        'title'			=> 'required|min:5',
 	        'status'		=> 'required',
-	        'description'	=> 'required|max:250|min:2',
+	        'description'	=> 'required|min:2',
 	        'image' 	  	=> 'image|mimes:jpeg,png,PNG,JPG,jpg,gif|max:2048'
     	]);
 

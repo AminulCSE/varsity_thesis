@@ -33,6 +33,7 @@ class ProductController extends Controller
 	        'category_id'	=> 'required',
 	        'price'			=> 'max:20',
 	        'description'	=> 'required|min:2',
+	        'size'			=> 'max:50',
 	        'image1' 	  	=> 'required|mimes:jpeg,png,PNG,JPG,jpg,gif|max:2048',
 	        'image2' 		=> 'mimes:jpeg,png,PNG,JPG,jpg,gif|max:2048',
 	        'image3' 	  	=> 'mimes:jpeg,png,PNG,JPG,jpg,gif|max:2048',
@@ -58,6 +59,7 @@ class ProductController extends Controller
 	    $data['price'] 			= $request->price;
 	    $data['product_slug'] 	= str_replace(' ', '_', $request->product_name);
 	    $data['description'] 	= $request->description;
+	    $data['size'] 			= $request->size;
 
     	if($request->has('image1') && $request->has('image2') && $request->has('image3')){
     	$img1 		= $request->file('image1');
@@ -134,6 +136,7 @@ class ProductController extends Controller
 	        'category_id'	=> 'required',
 	        'price'			=> 'max:20',
 	        'description'	=> 'required|min:2',
+	        'size'			=> 'max:50',
 	        'image1' 	  	=> 'mimes:jpeg,png,PNG,JPG,jpg,gif|max:2048',
 	        'image2' 		=> 'mimes:jpeg,png,PNG,JPG,jpg,gif|max:2048',
 	        'image3' 	  	=> 'mimes:jpeg,png,PNG,JPG,jpg,gif|max:2048',
@@ -146,6 +149,7 @@ class ProductController extends Controller
 	    $data['price'] 			= $request->price;
 	    $data['product_slug'] 	= str_replace(' ', '_', $request->product_name);
 	    $data['description'] 	= $request->description;
+	    $data['size'] 			= $request->size;
 
 		$old_img1 	= $request->old_img1;
 		$old_img2 	= $request->old_img2;

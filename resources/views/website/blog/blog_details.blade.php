@@ -113,7 +113,7 @@
                         <h3 class="section-title">আরো ব্লগ পোস্ট</h3>
                         <div class="owl-carousel home-owl-carousel upsell-product custom-carousel owl-theme outer-top-xs">
                     @php
-                        $more_blog = DB::table('blogs')->limit('2')->get();
+                        $more_blog = DB::table('blogs')->limit('5')->get();
                     @endphp
                     @foreach($more_blog as $more_blog_row)
                             <div class="item item-carousel">
@@ -131,7 +131,7 @@
                                     
                                     <div class="product-info text-left">
                                       <h2 class="name">
-                                        <a href="{{ url('product_details/'.$more_blog_row->id) }}">{{ $more_blog_row->title }}</a>
+                                        <a href="{{ url('blog_details/'.$more_blog_row->id) }}">{{ $more_blog_row->title }}</a>
                                       </h2>
                                       <!-- /.product-price --> 
                                       <div class="description">
@@ -139,19 +139,6 @@
                                       </div>
                                     </div>
                                     <!-- /.product-info -->
-                                    <div class="cart clearfix animate-effect">
-                                      <div class="action">
-                                        <ul class="list-unstyled">
-                                          <li class="add-cart-button btn-group">
-                                            <a href="{{ url('product_details/'.$more_blog_row->id) }}" class="btn btn-primary icon" type="button">
-                                              <i class="fa fa-shopping-cart"></i>
-                                            </a>
-                                          </li>
-                                          <li class="lnk wishlist"> <a class="add-to-cart" href="detail.html" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
-                                        </ul>
-                                      </div>
-                                      <!-- /.action --> 
-                                    </div>
                                     <!-- /.cart --> 
                                   </div>
                                 </div><!-- /.products -->

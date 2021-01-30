@@ -41,9 +41,47 @@
         <div class="cnt-account">
           <ul class="list-unstyled">
             
-            <li><a href="#"><i class="icon fa fa-heart"></i>উইস লিস্ট</a></li>
+            <li>
+              @if(Auth::check())
+              <a href="{{ url('view_wishlist/'.Auth::user()->id) }}">
+                <i class="icon fa fa-heart"></i>উইস লিস্ট</a>
+              @else
+              <a href="">
+                <i class="icon fa fa-heart"></i>উইস লিস্ট---খালি</a>
+              @endif
+
+
+              @if(Auth::check())
+              @php
+                $wishlist = DB::table('wishlists')
+                        ->where('user_id', Auth::user()->id)
+                        ->get();
+              @endphp
+              <span class="menu-label new-menu hidden-xs" style="color: green; font-size: 18px; background-color: pink; border-radius: 5px;">{{ count($wishlist) }}</span>
+              @endif
+            </li>
             <li><a href="{{ url('showcart') }}"><i class="icon fa fa-shopping-cart"></i>কার্ট</a></li>
-            <li><a href="#"><i class="icon fa fa-check"></i>চেকআউট</a></li>
+
+            
+            <li>
+              @if(@Auth::user()->id != NULL && Session::get('shipping_id') == NULL)
+              <a href="{{ url('checkout/order_checkout') }}">
+                <i class="icon fa fa-check"></i>চেকআউট
+              </a>
+              
+              @elseif(@Auth::user()->id != NULL && Session::get('shipping_id') != NULL )
+              <a href="{{ url('customer/payment') }}">
+                <i class="icon fa fa-check"></i>চেকআউট
+              </a>
+
+              @else
+              <a href="{{ route('login') }}">
+                <i class="icon fa fa-check"></i>চেকআউট
+              </a>
+              @endif
+            </li>
+
+
             @if(@Auth::check())
             <li>
               <a href="{{ route('user.home') }}">
@@ -53,7 +91,7 @@
             </li>
 
             <li>
-              <a href="{{ url('user/order/'.Auth::user()->id) }}">
+              <a href="{{ url('order_list') }}">
                 <i class="icon fa fa-shopping-cart"></i>অর্ডার
               </a>
             </li>
@@ -87,7 +125,17 @@
       <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-2 logo-holder"> 
           <!-- ============================================================= LOGO ============================================================= -->
-          <div class="logo"> <a href="{{ url('/') }}"> <img src="{{ asset('public/frontend/images/logo.png') }}" alt="logo"> </a> </div>
+          @php
+            $get_logo = DB::table('logos')->where('status', 1)->first();
+          @endphp
+          <div class="logo">
+            <a href="{{ url('/') }}">
+            <img style="width: 184px;
+    height: 69px;
+    left: 5px;
+    bottom: -55px;
+    position: absolute;" src="{{ asset($get_logo->image) }}" alt="logo"> </a>
+          </div>
           <!-- /.logo --> 
           <!-- ============================================================= LOGO : END ============================================================= --> </div>
         <!-- /.logo-holder -->
@@ -168,9 +216,37 @@
                 <div class="clearfix cart-total">
                   <div class="pull-right"> <span class="text">সাব টোটাল :</span><span class='price'>{{ $total }}</span> </div>
                   <div class="clearfix"></div>
-                  <a href="checkout.html" class="btn btn-upper btn-primary btn-block m-t-20">চেক আউট</a> </div>
-                <!-- /.cart-total--> 
                 
+                  @if(@Auth::user()->id != NULL && Session::get('shipping_id') == NULL)
+                  <a href="{{ url('checkout/order_checkout') }}" class="btn btn-upper btn-primary btn-block m-t-20">
+                    <i class="icon fa fa-check"></i>চেকআউট
+                  </a>
+
+                  @elseif(@Auth::user()->id != NULL && Cart::count() == null)
+                  <a href="{{ url('/') }}" style="background-color: red;" class="btn btn-upper btn-primary btn-block m-t-20">
+                    <i class="icon fa fa-check"></i>আপনার কার্টে প্রডাক্ট নেই।
+                  </a>
+                  
+                  @elseif(@Auth::user()->id != NULL && Session::get('shipping_id') != NULL )
+                  <a href="{{ url('customer/payment') }}" class="btn btn-upper btn-primary btn-block m-t-20">
+                    <i class="icon fa fa-check"></i>চেকআউট
+                  </a>
+
+                  @else
+                  <a href="{{ route('login') }}" class="btn btn-upper btn-primary btn-block m-t-20">
+                    <i class="icon fa fa-check"></i>চেকআউট
+                  </a>
+                  @endif
+              </div>
+              <!-- /.cart-total--> 
+
+
+
+
+
+
+
+
               </li>
 
             </ul>
@@ -210,8 +286,11 @@
             <div class="nav-outer">
               <ul class="nav navbar-nav">
 
-                <li class="dropdown {{ request()->is('/service') ? 'active':'' }}"> <a href="{{ url('/') }}">হোম</a> </li>
+                <li class="dropdown {{ request()->is('/') ? 'active':'' }}"> <a href="{{ url('/') }}">হোম</a>
+                </li>
 
+                <li class="dropdown hidden-sm {{ request()->is('all_products') ? 'active':'' }}"> <a href="{{ url('all_products') }}"> সকল প্রডাক্ট </a>
+                </li>
 
                  <li class="dropdown"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">বাগানের ধরন <div class="fa fa-sort-desc"></div></a>
                   <ul class="dropdown-menu pages">
@@ -230,15 +309,8 @@
                   </ul>
                 </li>
 
-
-
-
-
-                <li class="dropdown hidden-sm {{ request()->is('/service') ? 'active':'' }}"> <a href="category.html">আমাদের সার্ভিস</a> </li>
-
-                <li class="dropdown hidden-sm"> <a href="category.html">আমাদের সম্পর্কে </a> </li>
-
-                <li class="dropdown hidden-sm"> <a href="category.html">হেল্প সেন্টার</a> </li>
+                <li class="dropdown hidden-sm {{ request()->is('show_ourservice') ? 'active':'' }}"> <a href="{{ url('show_ourservice') }}">আমাদের সম্পর্কে</a> </li>
+                <li class="dropdown hidden-sm"> <a href="{{ url('our_service') }}">হেল্প সেন্টার</a> </li>
 
               </ul>
               <!-- /.navbar-nav -->

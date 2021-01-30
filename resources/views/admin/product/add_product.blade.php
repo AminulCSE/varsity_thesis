@@ -55,6 +55,13 @@
                                     </div>
 
                                     <div class="form-group row">
+                                        <label for="size" class="col-sm-2 col-form-label">Size</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" id="size" name="size" class="form-control" placeholder="Product size">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
                                         <label class="col-sm-2 col-form-label">Select Category</label>
                                         <div class="col-sm-8">
                                             <select name="category_id" class="form-control">

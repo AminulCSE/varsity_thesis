@@ -89,8 +89,11 @@
                         <a class="mobile-menu" id="mobile-collapse" href="#!">
                             <i class="feather icon-menu"></i>
                         </a>
-                        <a href="index-1.htm">
-                            <img class="img-fluid" src="{{ asset('public/backend/assets\images\logo.png') }}" alt="Theme-Logo">
+                        <a href="{{ route('admin.home') }}">
+                          @php
+                            $get_logo = DB::table('logos')->where('status', 1)->first();
+                          @endphp
+                            <img style="height: 55px; width: 191px;" class="img-fluid" src="{{ asset($get_logo->image) }}" alt="NogarDhara">
                         </a>
                         <a class="mobile-options">
                             <i class="feather icon-more-horizontal"></i>
@@ -123,32 +126,12 @@
                                     </div>
                                     <ul class="show-notification notification-view dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
                                         <li>
-                                            <h6>Notifications</h6>
+                                            <h6>Today Orders</h6>
                                             <label class="label label-danger">New</label>
                                         </li>
                                         <li>
                                             <div class="media">
-                                                <img class="d-flex align-self-center img-radius" src="..\files\assets\images\avatar-4.jpg" alt="Generic placeholder image">
-                                                <div class="media-body">
-                                                    <h5 class="notification-user">John Doe</h5>
-                                                    <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                    <span class="notification-time">30 minutes ago</span>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="media">
-                                                <img class="d-flex align-self-center img-radius" src="..\files\assets\images\avatar-3.jpg" alt="Generic placeholder image">
-                                                <div class="media-body">
-                                                    <h5 class="notification-user">Joseph William</h5>
-                                                    <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
-                                                    <span class="notification-time">30 minutes ago</span>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="media">
-                                                <img class="d-flex align-self-center img-radius" src="..\files\assets\images\avatar-4.jpg" alt="Generic placeholder image">
+                                                <img class="d-flex align-self-center img-radius" src="{{ asset(Auth::user()->image) }}" alt="Generic placeholder image">
                                                 <div class="media-body">
                                                     <h5 class="notification-user">Sara Soudein</h5>
                                                     <p class="notification-msg">Lorem ipsum dolor sit amet, consectetuer elit.</p>
@@ -162,13 +145,15 @@
                             <li class="user-profile header-notification">
                                 <div class="dropdown-primary dropdown">
                                     <div class="dropdown-toggle" data-toggle="dropdown">
-                                        <img src="..\files\assets\images\avatar-4.jpg" class="img-radius" alt="User-Profile-Image">
-                                        <span>
-                                            @if(@Auth::check())
-                                            {{ @Auth::user()->name }}
-                                            @endif
-                                        </span>
-                                        <i class="feather icon-chevron-down"></i>
+                                        @if(@Auth::check())
+                                            <img src="{{ asset(Auth::user()->image) }}" class="img-radius" alt="User-Profile-Image">
+                                            <span>
+                                                
+                                                {{ @Auth::user()->name }}
+                                                
+                                            </span>
+                                            <i class="feather icon-chevron-down"></i>
+                                        @endif
                                     </div>
                                     <ul class="show-notification profile-notification dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
                                         <li>

@@ -10,6 +10,12 @@ class FrontendController extends Controller
         return view('website');
     }
 
+    // all product page to show all product in all_product page
+    public function all_products(){
+        $all_product = DB::table('products')->where('status', 1)->paginate(8);
+         return view('website.all_products', ['all_productss' => $all_product], compact('all_product'));
+    }
+
     public function product_details($id){
     	$product_details = DB::table('products')->where('id', $id)->first();
     	return view('website.product_details', compact('product_details'));
@@ -17,12 +23,12 @@ class FrontendController extends Controller
 
     // products show by categories id
     public function show_product_by_cat($id){
-        $products_by_cat_id = DB::table('products')->where('category_id', $id)->paginate(1);
+        $products_by_cat_id = DB::table('products')->where('category_id', $id)->paginate(10);
          return view('website.show_product_by_cat', ['all_productss' => $products_by_cat_id], compact('products_by_cat_id'));
     }
 
     public function show_product_by_cat_subcat($id, $subcatid){
-        $products_by_cat_id = DB::table('products')->where('category_id', $id)->paginate(1);
+        $products_by_cat_id = DB::table('products')->where('category_id', $id)->paginate(10);
          return view('website.show_product_by_cat', ['all_productss' => $products_by_cat_id], compact('products_by_cat_id'));
     }
 
@@ -32,6 +38,16 @@ class FrontendController extends Controller
          return view('website.blog.blog_details', compact('blogshow_id'));
     }
 
+
+
+
+
+
+    // -------------------------------------Our service------------------------------------
+    public function show_ourservice(){
+        $our_service = DB::table('our_services')->first();
+        return view('website.our_service', compact('our_service'));
+    }
     
 
     // public function userHome()

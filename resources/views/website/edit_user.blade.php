@@ -27,7 +27,7 @@
 
 
 
-                            <h4 class="checkout-subtitle">Edit your info</h4>
+                            <h4 class="checkout-subtitle" style="color: #05a70a; text-align: center;">আপডেট করুন আপনার তথ্য</h4>
                             <form action="{{ url('user/user_update/'.Auth::user()->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
@@ -48,18 +48,20 @@
                                     <label class="info-title" for="image">প্রফাইল ফটো</label>
                                     <input type="hidden" name="old_image" value="{{ Auth::user()->image }}">
 
-                                    <input type="file" name="image" value="{{ Auth::user()->image }}" class="form-control unicase-form-control text-input" id="image">
+                                    <input type="file" name="image" value="{{ Auth::user()->image }}" class="form-control unicase-form-control text-input" id="image" onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])">
+
+                                    <img id="blah" alt="your image" width="100" height="100" />
                                 </div>
                                 <button type="submit" class="btn-upper btn btn-primary checkout-page-button">আপডেট</button>
                             </form>
                         </div>
 
-                          <div class="col-md-4 col-sm-12" style="background-color: #023020; padding: 30px; margin: 15px 0px; height: 400px">
-                            <a class="btn btn-success" href="{{ route('user.home') }}">আমার প্রফাইল</a><br><br>
-                             <a class="btn btn-success" href="{{ url('user/user_edit/'.Auth::user()->id) }}">প্রফাইল পরিবর্তন</a><br><br>
-                            <a class="btn btn-success" href="{{ url('user/change_userpass/'.Auth::user()->id) }}">পাসওয়ার্ড চেন্জ</a><br><br>
-                            <a class="btn btn-success" href="{{ url('user/order/'.Auth::user()->id) }}">অর্ডার</a>
-                        </div>
+                          <div class="col-md-4 col-sm-12" style="background-color: #05a70a; padding: 30px; margin: 15px 0px; height: 400px">
+                              <span style="color: white;">></span><a class="btn btn-primary" href="{{ route('user.home') }}">আমার প্রফাইল</a><br><br>
+                             <span style="color: white;">></span><a class="btn btn-primary" href="{{ url('user/user_edit/'.Auth::user()->id) }}">প্রফাইল পরিবর্তন</a><br><br>
+                            <span style="color: white;">></span><a class="btn btn-primary" href="{{ url('user/change_userpass/'.Auth::user()->id) }}">চেন্জ পাসওয়ার্ড</a><br><br>
+                            <span style="color: white;">></span><a class="btn btn-primary" href="{{ url('order_list') }}">অর্ডার</a>
+                          </div>
                       </div><!-- /.row -->
                     @else
                     <h2 style="text-align: center;color: #ff4433;">অনুগ্রহ করে লগইন/ রেজিস্ট্রেশন করুন:-

@@ -7,11 +7,19 @@
                     @if(Auth::check())
                       <div class="row  wow fadeInUp">
                           <div class="col-md-8 col-sm-8 create-new-account">
-                             @if(session()->has('message'))
+
+                          @if(session()->has('message'))
                               <div class="alert alert-success">
                                   {{ session()->get('message') }}
                               </div>
                           @endif
+
+                          @if(session()->has('error'))
+                              <div class="alert alert-warning">
+                                  {{ session()->get('error') }}
+                              </div>
+                          @endif
+
                           @if ($errors->any())
                               <div class="alert alert-danger">
                                   <ul>
@@ -22,7 +30,7 @@
                               </div>
                           @endif
 
-                            <h4 class="checkout-subtitle">আপডেট পাসওয়ার্ড</h4>
+                            <h4 class="checkout-subtitle" style="color: #05a70a; text-align: center;">আপডেট পাসওয়ার্ড</h4>
 
                             <form action="{{ url('user/update_password/'.Auth::user()->id) }}" method="post">
                                 @csrf
@@ -40,12 +48,12 @@
                             </form>
                         </div>
 
-                          <div class="col-md-4 col-sm-12" style="background-color: #023020; padding: 30px; margin: 15px 0px; height: 400px">
-                            <a class="btn btn-success" href="{{ route('user.home') }}">আমার প্রফাইল</a><br><br>
-                             <a class="btn btn-success" href="{{ url('user/user_edit/'.Auth::user()->id) }}">প্রফাইল পরিবর্তন</a><br><br>
-                            <a class="btn btn-success" href="{{ url('user/change_userpass/'.Auth::user()->id) }}">পাসওয়ার্ড চেন্জ</a><br><br>
-                            <a class="btn btn-success" href="{{ url('user/order/'.Auth::user()->id) }}">অর্ডার</a>
-                        </div>
+                          <div class="col-md-4 col-sm-12" style="background-color: #05a70a; padding: 30px; margin: 15px 0px; height: 400px">
+                              <span style="color: white;">></span><a class="btn btn-primary" href="{{ route('user.home') }}">আমার প্রফাইল</a><br><br>
+                             <span style="color: white;">></span><a class="btn btn-primary" href="{{ url('user/user_edit/'.Auth::user()->id) }}">প্রফাইল পরিবর্তন</a><br><br>
+                            <span style="color: white;">></span><a class="btn btn-primary" href="{{ url('user/change_userpass/'.Auth::user()->id) }}">চেন্জ পাসওয়ার্ড</a><br><br>
+                            <span style="color: white;">></span><a class="btn btn-primary" href="{{ url('order_list') }}">অর্ডার</a>
+                          </div>
                       </div><!-- /.row -->
                     @else
                     <h2 style="text-align: center;color: #ff4433;">অনুগ্রহ করে লগইন/ রেজিস্ট্রেশন করুন:-

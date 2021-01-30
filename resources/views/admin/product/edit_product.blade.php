@@ -79,6 +79,13 @@
                                     </div>
 
                                     <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label">Size</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" name="size" class="form-control" value="{{ $edit_product->size }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
                                         <label class="col-sm-2 col-form-label">Product Image1</label>
                                         <div class="col-sm-8">
                                             <img src="{{ asset($edit_product->image1) }}" style="height: 70px; width: auto;">

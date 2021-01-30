@@ -105,7 +105,7 @@ class HomeController extends Controller{
 
             return redirect()->back()->with('message', 'Password Successfully Updated');
         }else{
-            return redirect()->back()->with('message', 'Old password does not matched');
+            return redirect()->back()->with('error', 'Old password does not matched');
         }
     }
 

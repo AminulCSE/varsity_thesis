@@ -1,5 +1,21 @@
 @extends('layouts.frontapp')
 @section('content')
+
+<!-- Notification for success or error -->
+@if(session()->has('success'))
+<div class="alert alert-success text-center">
+    {{ session()->get('success') }}
+</div>
+@endif
+
+@if(session()->has('error'))
+<div class="alert alert-danger text-center">
+    {{ session()->get('error') }}
+</div>
+@endif
+
+
+
 <div class="body-content outer-top-xs" id="top-banner-and-menu">
 <div class="container">
 <div class="row"> 
@@ -111,7 +127,7 @@
                                                     <a href="{{ url('product_details/'.$all_products->id) }} " type="submit" class="btn btn-primary"><i class="fa fa-shopping-cart inner-right-vs"></i>এড টু কার্ট</a>
                                                   </li>
                                                   <li class="lnk wishlist"> 
-                                                    <a class="" href="detail.html" title="Wishlist"> 
+                                                    <a class="" href="{{ url('add_to_wishlist/'.$all_products->id) }}" title="Wishlist"> 
                                                         <i class="icon fa fa-heart"></i>
                                                     </a>
                                                   </li>

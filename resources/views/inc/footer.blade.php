@@ -156,11 +156,10 @@
       <div class="col-xs-12 col-sm-6 no-padding">
         <div class="clearfix payment-methods">
           <ul>
-            <li><img src="{{ asset('public/frontend/images/payments/1.png')}}" alt=""></li>
-            <li><img src="{{ asset('public/frontend/images/payments/2.png')}}" alt=""></li>
-            <li><img src="{{ asset('public/frontend/images/payments/3.png')}}" alt=""></li>
-            <li><img src="{{ asset('public/frontend/images/payments/4.png')}}" alt=""></li>
-            <li><img src="{{ asset('public/frontend/images/payments/5.png')}}" alt=""></li>
+            <li><img style="height: 50px; width: auto;" src="{{ asset('public/frontend/images/payments/bkash.png')}}" alt=""></li>
+            <li><img style="height: 50px; width: auto;" src="{{ asset('public/frontend/images/payments/nagad.png')}}" alt=""></li>
+            <li><img style="height: 50px; width: auto;" src="{{ asset('public/frontend/images/payments/hand_cash.png')}}" alt="">
+            </li>
           </ul>
         </div>
         <!-- /.payment-methods --> 
@@ -187,5 +186,25 @@
 <script src="{{ asset('public/frontend/js/bootstrap-select.min.js') }}"></script> 
 <script src="{{ asset('public/frontend/js/wow.min.js') }}"></script> 
 <script src="{{ asset('public/frontend/js/scripts.js') }}"></script>
+
+
+<script>
+
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      
+      reader.onload = function(e) {
+        $('#image').attr('src', e.target.result);
+      }
+      
+      reader.readAsDataURL(input.files[0]); // convert to base64 string
+    }
+  }
+  $("#previewimg").change(function() {
+    readURL(this);
+  });
+
+</script>
 </body>
 </html>

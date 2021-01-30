@@ -63,4 +63,13 @@ class LoginController extends Controller
 
 
 
+
+// admin function here
+    public function allAdmin(){
+        $get_admin = DB::table('users')->where('is_admin', 1)->get();
+        return view('admin.admin.all_admin', compact('get_admin'));
+    }
+
+
+
 }

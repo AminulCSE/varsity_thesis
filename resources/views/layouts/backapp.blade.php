@@ -75,6 +75,26 @@
                                     </ul>
                                 </li>
 
+
+                                <li class="pcoded-hasmenu {{ request()->is('ourservice/*') ? 'pcoded-trigger':'' }}">
+                                    <a href="javascript:void(0)">
+                                        <span class="pcoded-micon"><i class="feather icon-sidebar"></i></span>
+                                        <span class="pcoded-mtext">Our Service/ About us</span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+                                        <li class="{{ request()->is('ourservice/add_our_service') ? 'active':'' }}">
+                                            <a href="{{ url('ourservice/add_our_service') }}">
+                                                <span class="pcoded-mtext">Add Service</span>
+                                            </a>
+                                        </li>
+                                        <li class="{{ request()->is('ourservice/view_our_service') ? 'active':'' }}">
+                                            <a href="{{ url('ourservice/view_our_service') }}">
+                                                <span class="pcoded-mtext">View Our Service</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
                                 <li class="pcoded-hasmenu {{ request()->is('blog/*') ? 'pcoded-trigger':'' }}">
                                     <a href="javascript:void(0)">
                                         <span class="pcoded-micon"><i class="feather icon-sidebar"></i></span>
@@ -110,6 +130,26 @@
                                         <li class="{{ request()->is('banner/all_banner') ? 'active':'' }}">
                                             <a href="{{ url('banner/all_banner') }}">
                                                 <span class="pcoded-mtext">All Banner</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+
+                                <li class="pcoded-hasmenu {{ request()->is('logo/*') ? 'pcoded-trigger':'' }}">
+                                    <a href="javascript:void(0)">
+                                        <span class="pcoded-micon"><i class="feather icon-sidebar"></i></span>
+                                        <span class="pcoded-mtext">Logo</span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+                                        <li class="{{ request()->is('logo/add_logo') ? 'active':'' }}">
+                                            <a href="{{ url('logo/add_logo') }}">
+                                                <span class="pcoded-mtext">Add Logo</span>
+                                            </a>
+                                        </li>
+                                        <li class="{{ request()->is('logo/all_logo') ? 'active':'' }}">
+                                            <a href="{{ url('logo/all_logo') }}">
+                                                <span class="pcoded-mtext">All Logo</span>
                                             </a>
                                         </li>
                                     </ul>
@@ -155,6 +195,47 @@
                                         </li>
                                     </ul>
                                 </li>
+
+                                <li class="pcoded-hasmenu {{ request()->is('orders/*') ? 'pcoded-trigger':'' }}">
+                                    <a href="javascript:void(0)">
+                                        <span class="pcoded-micon"><i class="feather icon-layers"></i></span>
+                                        <span class="pcoded-mtext">Orders</span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+                                        <li class="{{ request()->is('orders/approved_orders') ? 'active':'' }}">
+                                            <a href="{{ url('orders/approved_orders') }}">
+                                                <span class="pcoded-mtext">Approved Orders</span>
+                                            </a>
+                                        </li>
+                                        <li class="{{ request()->is('orders/pending_orders') ? 'active':'' }}">
+                                            <a href="{{ url('orders/pending_orders') }}">
+                                                <span class="pcoded-mtext">Pending Orders</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+
+
+                                 <li class="pcoded-hasmenu {{ request()->is('admin/*') ? 'pcoded-trigger':'' }}">
+                                    <a href="javascript:void(0)">
+                                        <span class="pcoded-micon"><i class="feather icon-layers"></i></span>
+                                        <span class="pcoded-mtext">Admin</span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+                                        <li class="{{ request()->is('admin/add_admin') ? 'active':'' }}">
+                                            <a href="{{ url('admin/add_admin') }}">
+                                                <span class="pcoded-mtext">Add Admin</span>
+                                            </a>
+                                        </li>
+                                        <li class="{{ request()->is('admin/all_admin') ? 'active':'' }}">
+                                            <a href="{{ url('admin/all_admin') }}">
+                                                <span class="pcoded-mtext">All Admin</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
 
 
                                 

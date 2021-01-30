@@ -1,0 +1,82 @@
+@extends('layouts.backapp')
+@section('backend_content')
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <!-- Main-body start -->
+        <div class="main-body">
+            <div class="page-wrapper">
+                <!-- Page-header start -->
+                <!-- Page-header end -->
+                <div class="page-body">
+                    <!-- Config. table start -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>All Pending Orders</h5>
+                            <a class="btn btn-primary float-right" href="{{ url('orders/approved_orders') }}">Approved Orders</a>
+                            
+                        </div>
+
+                        <div class="card-block">
+                            <div class="dt-responsive table-responsive">
+                                <table id="new-cons" class="table table-striped table-bordered nowrap">
+                                    <div class="col-md-5">
+                                        @if(session()->has('message'))
+                                            <div class="alert alert-success">
+                                                {{ session()->get('message') }}
+                                            </div>
+                                        @endif
+                                    </div>
+                                    <thead>
+                                        <tr>
+                                            <th>Sl No.</th>
+                                            <th>Total Tk</th>
+                                            <th>Payent type</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @php $i=1; @endphp
+                                        @foreach($pending_orders as $pending_row)
+                                        <tr>
+                                            <td>{{ $i++ }}</td>
+                                            <td>{{ $pending_row->order_total }}</td>
+                                            <td>
+                                                {{ $pending_row->payment_method }}
+                                                @if($pending_row->payment_method=='Bkash')
+                                                <span>(Transaction no: {{ $pending_row->transaction_no }})</span>
+                                                @endif
+                                            </td>
+
+                                            <td>
+                                                @if($pending_row->status==0)
+                                            <span class="text-danger">Order Pending</span>
+                                                @elseif($pending_row->status==1)
+                                            <span class="text-primary">Approved</span>
+                                                @endif
+                                            </td>
+
+                                            <td>
+                                                <a href="{{ url('order/edit_order/'.$pending_row->id) }}" title="Edit">
+                                                    <i style="font-size: 22px;" class="ti ti-pencil-alt"></i>
+                                                </a>
+                                                
+                                                <a href="{{ url('customer/draft_customer/'.$pending_row->id) }}" title="Draft" onclick="return confirm('Are you sure to delete Slider?')">
+                                                    <i style="font-size: 22px;margin-left: 10px;" class="ti ti-na"></i>
+                                                </a>
+                                            </td>
+
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Config. table end -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

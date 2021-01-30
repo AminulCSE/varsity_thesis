@@ -8,12 +8,12 @@
                       <div class="shopping-cart">
                         <div class="shopping-cart-table">
                           @if(session()->has('message'))
-                                <div class="alert alert-success">
+                                <div class="alert alert-success text-center">
                                     {{ session()->get('message') }}
                                 </div>
                             @endif
                             @if ($errors->any())
-                                <div class="alert alert-danger">
+                                <div class="alert alert-danger text-center">
                                     <ul>
                                         @foreach ($errors->all() as $error)
                                             <li>{{ $error }}</li>
@@ -28,6 +28,8 @@
                                 <th class="cart-description item">Image</th>
                                 <th class="cart-product-name item">Product Name</th>
                                 <th class="cart-qty item">Quantity</th>
+                                <th class="cart-price item">Price</th>
+                                <th class="cart-price item">Size</th>
                                 <th class="cart-sub-total item">Subtotal</th>
                                 <th class="cart-romove item">Remove</th>
                               </tr>
@@ -58,6 +60,8 @@
                                   </a>
                                 </td>
 
+                                
+
                                 <td class="cart-product-name-info">
                                   <h4 class="cart-product-description"><a href="{{ url('product_details/'.$cartval_row->id) }}">{{ $cartval_row->name }}</a></h4>
                                   
@@ -78,6 +82,19 @@
                                       <input type="submit" name="submit" value="Update">
                                 </td>
                               </form>
+
+                              <td>
+                                  <div class="cart-product-info">
+                                    {{ $cartval_row->price }}
+                                  </div>
+                              </td>
+
+                              <td>
+                                  <div class="cart-product-info">
+                                    {{ $cartval_row->options->size }}
+                                  </div>
+                              </td>
+
 
 
 
@@ -120,7 +137,15 @@
                               <tr>
                                 <td>
                                   <div class="cart-checkout-btn pull-right">
-                                    <button type="submit" class="btn btn-primary checkout-btn">PROCCED TO CHEKOUT</button>
+                                    @if(@Auth::user()->id != NULL && Session::get('shipping_id') == NULL)
+                                    <a href="{{ url('checkout/order_checkout') }}" class="btn btn-primary checkout-btn">PROCCED TO CHEKOUT</a>
+                                    @elseif(@Auth::user()->id != NULL && Session::get('shipping_id') != NULL)
+
+                                    <a href="{{ url('customer/payment') }}" class="btn btn-primary checkout-btn">PROCCED TO CHEKOUT</a>
+                                    @else
+                                    <a href="{{ route('login') }}" class="btn btn-primary checkout-btn">PROCCED TO CHEKOUT</a>
+                                    @endif
+
                                   </div>
                                 </td>
                               </tr>
@@ -129,11 +154,6 @@
                       </div><!-- /.cart-shopping-total -->      
                     </div><!-- /.shopping-cart -->
                   </div>
-
-
-
-
-
                 </div><!-- /.row -->
               </div>
             </div><!-- /.col -->

@@ -4,8 +4,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'FrontendController@index');
 // Product details
 Route::get('product_details/{id}', 'FrontendController@product_details');
+Route::get('all_products', 'FrontendController@all_products');
 
-
+// Show our service infront of the page
+Route::get('show_ourservice', 'FrontendController@show_ourservice');
 
 // User Profile route here
 // -----------------------HomeController route here-----------------------
@@ -18,8 +20,6 @@ Route::post('user/user_update/{id}', 'HomeController@updateUser');
 Route::get('user/change_userpass/{id}', 'HomeController@editpassword');
 Route::post('user/update_password/{id}', 'HomeController@updatepassword');
 
-
-
 // Blog details
 Route::get('blog_details/{id}', 'FrontendController@blog_details');
 
@@ -30,9 +30,28 @@ Route::get('showcart', 'CartController@showCart');
 Route::post('updatecart', 'CartController@updatecart');
 Route::get('destroycart/{rowId}', 'CartController@destroycart');
 
+// ------------------------------CartController--------------------------
+Route::get('add_to_wishlist/{product_id}', 'WishlistController@addWishList');
+Route::get('view_wishlist/{id}', 'WishlistController@showWishList');
+Route::get('delete_wishlist/{id}', 'WishlistController@deleteWishlist');
+
 // Product show by category
 Route::get('show_product_by_category/{id}', 'FrontendController@show_product_by_cat');
 Route::get('show_product_by_category/{id}/{subcatid}', 'FrontendController@show_product_by_cat_subcat');
+
+
+
+// Customer checkout
+Route::get('checkout/order_checkout', 'CheckOutController@checkoutadd');
+Route::post('checkout/store', 'CheckOutController@checkoutstore');
+
+// Customer payment
+Route::get('customer/payment', 'PaymentController@payment');
+Route::post('customer/payment/store', 'PaymentController@payment_store');
+Route::get('order_list', 'PaymentController@orderList');
+Route::get('order_details/{id}', 'PaymentController@orderDetails');
+
+
 
 
 // -----------------------Backend route here------------------------->middleware('is_admin');
@@ -50,8 +69,13 @@ Route::middleware('is_admin')->group(function (){
 	Route::post('category/update_category/{id}', 'admin\CategoryController@updateCategory');
 	Route::get('category/delete_category/{id}', 'admin\CategoryController@deleteCategory');
 
-	
-
+	// Admin controller route here
+	Route::get('admin/all_admin', 'admin\LogoController@allAdmin');
+	Route::get('admin/add_admin', 'admin\LogoController@addAdmin');
+	Route::post('admin/store_admin', 'admin\LogoController@storeAdmin');
+	Route::get('admin/edit_admin/{id}', 'admin\LogoController@editAdmin');
+	Route::post('admin/update_admin/{id}', 'admin\LogoController@updateAdmin');
+	Route::get('admin/delete_admin/{id}', 'admin\LogoController@deleteAdmin');
 
 	// SubCategory route here
 	Route::get('subcategory/all_sub_category', 'admin\SubCategoryController@allSubCategroy');
@@ -60,6 +84,16 @@ Route::middleware('is_admin')->group(function (){
 	Route::get('subcategory/edit_sub_category/{id}', 'admin\SubCategoryController@editSubCategroy');
 	Route::post('subcategory/update_sub_category/{id}', 'admin\SubCategoryController@updateSubCategory');
 	Route::get('subcategory/delete_sub_category/{id}', 'admin\SubCategoryController@deleteSubCategory');
+
+
+	// our service or about us
+	 Route::get('ourservice/add_our_service', 'admin\OurServiceController@addOurService');
+	 Route::post('ourservice/store_our_service', 'admin\OurServiceController@StoreOurService');
+	 Route::get('ourservice/view_our_service', 'admin\OurServiceController@viewOurService');
+	 Route::get('ourservice/edit_ourservice/{id}', 'admin\OurServiceController@EditOurservice');
+	 Route::post('ourservice/update_ourservice/{id}', 'admin\OurServiceController@UpdateOurservice');
+	 Route::get('ourservice/delete_ourservice/{id}', 'admin\OurServiceController@DeleteOurservice');
+
 
 	// Slider route here
 	Route::get('slider/all_slider', 'admin\SliderController@allSlider');
@@ -77,6 +111,14 @@ Route::middleware('is_admin')->group(function (){
 	Route::post('banner/update_banner/{id}', 'admin\BannerController@updateBanner');
 	Route::get('banner/delete_banner/{id}', 'admin\BannerController@deleteBanner');
 
+	// Banner route here
+	Route::get('logo/all_logo', 'admin\LogoController@allLogo');
+	Route::get('logo/add_logo', 'admin\LogoController@addLogo');
+	Route::post('logo/store_logo', 'admin\LogoController@storeLogo');
+	Route::get('logo/edit_logo/{id}', 'admin\LogoController@editLogo');
+	Route::post('logo/update_logo/{id}', 'admin\LogoController@updateLogo');
+	Route::get('logo/delete_logo/{id}', 'admin\LogoController@deleteLogo');
+
 	// Product route here
 	Route::get('product/all_product', 'admin\ProductController@allProduct');
 	Route::get('product/add_product', 'admin\ProductController@addProduct');
@@ -85,12 +127,17 @@ Route::middleware('is_admin')->group(function (){
 	Route::post('product/update_product/{id}', 'admin\ProductController@updateProduct');
 	Route::get('product/delete_product/{id}', 'admin\ProductController@deleteProduct');
 
-	// Product route here
+	// Customer route here
 	Route::get('customer/all_customer', 'admin\CustomerController@allCustomer');
 	Route::get('customer/draft_customer/{id}', 'admin\CustomerController@stroDraft');
 	Route::get('customer/all_draft_customer', 'admin\CustomerController@allDraftCustomer');
 	Route::get('customer/undraft_customer/{id}', 'admin\CustomerController@UnDraftCustomer');
 	Route::get('customer/delete_customer/{id}', 'admin\CustomerController@deleteCustomer');
+
+	// Customer route here
+	Route::get('orders/approved_orders', 'admin\OrderController@Approved_Order');
+	Route::get('orders/pending_orders', 'admin\OrderController@Pending_Order');
+	Route::get('orders/order_details/{id}', 'admin\OrderController@Order_Details');
 
 	// Slider route here
 	Route::get('blog/all_blog', 'admin\BlogController@allBlog');

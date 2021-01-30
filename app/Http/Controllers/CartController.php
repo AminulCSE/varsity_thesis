@@ -20,6 +20,7 @@ class CartController extends Controller
 			'options'=>[
 				'image1'=>$request->image1,
 				'product_code'=>$request->product_code,
+				'size'=>$request->size,
 
 			],
 		]);

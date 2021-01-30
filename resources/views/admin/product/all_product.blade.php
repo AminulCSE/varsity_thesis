@@ -34,6 +34,7 @@
                                             <th>Category</th>
                                             <th>Price</th>
                                             <th>Description</th>
+                                            <th>Size</th>
                                             <th>Image</th>
                                             <th>Status</th>
                                             <th>Action</th>
@@ -49,6 +50,7 @@
                                             <td>{{ $product_row->category_name }}</td>
                                             <td>{{ $product_row->price }}</td>
                                             <td>{{ $product_row->description }}</td>
+                                            <td>{{ $product_row->size }}</td>
                                             
                                             <td>
                                                 <img src="{{ asset($product_row->image1) }}" style="height: 85px; width: auto;">
