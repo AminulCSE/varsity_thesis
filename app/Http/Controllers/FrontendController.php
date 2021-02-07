@@ -34,7 +34,11 @@ class FrontendController extends Controller
 
     // Frontend blog Controller
     public function blog_details($id){
-        $blogshow_id = DB::table('blogs')->where('id', $id)->first();
+        $blogshow_id = DB::table('blogs')
+                        ->join('users', 'blogs.user_id', 'users.id')
+                        ->select('blogs.*', 'users.name')
+                        ->where('blogs.id', $id)
+                        ->get();
          return view('website.blog.blog_details', compact('blogshow_id'));
     }
 

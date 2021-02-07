@@ -41,17 +41,36 @@
                                                   <!-- /.blog-post-image -->
                                                   
                                                   <div class="blog-post-info text-left"><br>
-                                                    <span class="info">By Jone Doe &nbsp;|&nbsp; {{ $our_service->created_at }}</span><br><br>
+                                                    <span class="info">Published Date: {{ $our_service->created_at }}</span><br><br>
                                                     <p style="text-align: justify;" class="text">{{ $our_service->description }}</p>
                                                   </div>
                                                   <!-- /.blog-post-info --> 
                                                   
                                                 </div>
-                                                <!-- /.blog-post --> 
+                                                <!-- /.blog-post -->
+
                                               </div>
                                               <!-- /.item -->
                                           </div>
-                                          <!-- /.blog-slider-container --> 
+                                          <!-- /.blog-slider-container -->
+
+
+          <div class="col-xs-12 col-sm-6 no-padding social">
+            <h4 style="color: green;">Our social medai Plateform</h4><br> 
+              <ul class="link">
+                <li class="fb pull-left"><a target="_blank" rel="nofollow" href="#" title="Facebook"></a></li>
+                <li class="tw pull-left"><a target="_blank" rel="nofollow" href="#" title="Twitter"></a></li>
+                <li class="googleplus pull-left"><a target="_blank" rel="nofollow" href="#" title="GooglePlus"></a></li>
+                <li class="rss pull-left"><a target="_blank" rel="nofollow" href="#" title="RSS"></a></li>
+                <li class="pintrest pull-left"><a target="_blank" rel="nofollow" href="#" title="PInterest"></a></li>
+                <li class="linkedin pull-left"><a target="_blank" rel="nofollow" href="#" title="Linkedin"></a></li>
+                <li class="youtube pull-left"><a target="_blank" rel="nofollow" href="#" title="Youtube"></a></li>
+              </ul>
+          </div>
+
+
+
+
                                         </section>
                                         <!-- /.section -->
                                 </div>

@@ -187,19 +187,18 @@
             </div>
             <!-- /.item -->
     @endforeach
-
           </div>
           <!-- /.home-owl-carousel --> 
         </section>
         <!-- /.section --> 
-        <!-- ============================================== FEATURED PRODUCTS : END ============================================== --> 
+        <!-- =========== FEATURED PRODUCTS : END =========== --> 
 
-
-
-        <!-- ============================================== BLOG SLIDER ============================================== -->
-
+        <!-- ======================= BLOG SLIDER ===========================-->
         @php
-          $all_blog = DB::table('blogs')->where('status', 1)->get();
+          $all_blog = DB::table('blogs')->where('blogs.status', 1)
+                    ->join('users', 'blogs.user_id', 'users.id')
+                    ->select('blogs.*', 'users.name')
+                    ->get();
         @endphp
         <section class="section latest-blog outer-bottom-vs wow fadeInUp">
           <h3 class="section-title">ব্লগ পোস্ট</h3>
@@ -217,12 +216,11 @@
                     <h3 class="name">
                       <a href="#">{{ $blog_row->title }}</a>
                     </h3>
-                    <span class="info">By Jone Doe &nbsp;|&nbsp; {{ $blog_row->created_at }}</span>
+                    <span class="info">{{ $blog_row->name }} &nbsp;|&nbsp; {{ $blog_row->created_at }}</span>
                     <p class="text">{{ Str::limit($blog_row->description, 350) }}</p>
                     <a href="{{ url('blog_details/'.$blog_row->id) }}" class="lnk btn btn-primary">Read more</a>
                   </div>
                   <!-- /.blog-post-info --> 
-                  
                 </div>
                 <!-- /.blog-post --> 
               </div>
