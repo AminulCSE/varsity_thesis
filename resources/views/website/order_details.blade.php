@@ -22,7 +22,8 @@
                           <div class="col-md-8 table-responsive">
                             <table class="table-bordered" width="100%" style="background-color: #f7f7f7;">
                               <tr>
-                                <td width="30%"><img style="height: 60px; width: auto; margin: 10px;" src="{{ asset($get_logo->image) }}"></td>
+                                <td width="30%" style="background: #023020;">
+                                  <img style="height: 90px; width: auto; margin: 40px;" src="{{ asset($get_logo->image) }}"></td>
                                 <td width="40%" style="padding: 10px;">
                                   <span style="font-size: 25px; text-align: center; color: #05a70a;">নগরধারা </span><br>
                                   মোবাইল নংঃ 01787377982<br>

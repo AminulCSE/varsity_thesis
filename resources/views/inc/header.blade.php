@@ -144,14 +144,16 @@
           <!-- /.contact-row --> 
           <!-- ============================================================= SEARCH AREA ============================================================= -->
           <div class="search-area">
-            <form>
+            <form action="{{ url('product_search') }}" method="get" role="search">
               <div class="control-group">
-                <input class="search-field" placeholder="Search here..." />
-                <a class="search-button" href="#" ></a> </div>
+                <input class="search-field" name="product_slug" placeholder="Product Search here..." />
+                <button type="submit" class="search-button"></button>
+              </div>
             </form>
           </div>
           <!-- /.search-area --> 
-          <!-- ============================================================= SEARCH AREA : END ============================================================= --> </div>
+          <!-- ============================================================= SEARCH AREA : END ============================================================= -->
+        </div>
         <!-- /.top-search-holder -->
         
         <div class="col-xs-12 col-sm-12 col-md-3 animate-dropdown top-cart-row"> 

@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use DB;
+use App\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 class FrontendController extends Controller
@@ -45,6 +46,15 @@ class FrontendController extends Controller
 
 
 
+    // -------------------------Product search-----------------------------------------
+    public function Product_Search(Request $request){
+        $product_slug   = $request->product_slug;
+        $search_product_details = DB::table('products')
+                                ->where('product_slug', 'LIKE', '%'.$product_slug.'%')
+                                ->orWhere('product_name', 'LIKE', '%'.$product_slug.'%')
+                                ->get();
+        return view('website.product_search', compact('search_product_details'));
+    }
 
 
     // -------------------------------------Our service------------------------------------

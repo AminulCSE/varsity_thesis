@@ -9,6 +9,10 @@ Route::get('all_products', 'FrontendController@all_products');
 // Show our service infront of the page
 Route::get('show_ourservice', 'FrontendController@show_ourservice');
 
+// Product search
+Route::get('product_search', 'FrontendController@Product_Search');
+
+
 // User Profile route here
 // -----------------------HomeController route here-----------------------
 // Route::get('user_home', 'HomeController@userHome')->name('user.home');
