@@ -44,19 +44,8 @@
     (d.head || d.body).appendChild(s);
     })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-
-
-
-
-
-
-
 
       <div class="blog-review wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
-
-
-
 
       <div class="related_blog">
         <section class="section featured-product wow fadeInUp">

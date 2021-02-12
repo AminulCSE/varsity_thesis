@@ -70,11 +70,16 @@ class PaymentController extends Controller
     }
 
     public function orderList(){
-    	$order_data = DB::table('orders')
-            ->join('payments', 'orders.payment_id', 'payments.id')
-            ->orderBy('orders.id', 'ASC')->where('orders.user_id', Auth::user()->id)
-            ->get();
-    	return view('website.customer_order', compact('order_data'));
+        if (Auth::check()) {
+            $order_data = DB::table('orders')
+                ->join('payments', 'orders.payment_id', 'payments.id')
+                ->orderBy('orders.id', 'ASC')
+                ->where('orders.user_id', Auth::user()->id)
+                ->get();
+            return view('website.customer_order', compact('order_data'));
+        }else{
+            return redirect()->to('/');
+        }
     }
 
 

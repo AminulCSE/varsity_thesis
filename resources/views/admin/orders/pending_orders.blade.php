@@ -13,7 +13,6 @@
                         <div class="card-header">
                             <h5>All Pending Orders</h5>
                             <a class="btn btn-primary float-right" href="{{ url('orders/approved_orders') }}">Approved Orders</a>
-                            
                         </div>
 
                         <div class="card-block">
@@ -29,6 +28,8 @@
                                     <thead>
                                         <tr>
                                             <th>Sl No.</th>
+                                            <th>Customer name</th>
+                                            <th>Order no</th>
                                             <th>Total Tk</th>
                                             <th>Payent type</th>
                                             <th>Status</th>
@@ -37,9 +38,13 @@
                                     </thead>
                                     <tbody>
                                         @php $i=1; @endphp
+
+
                                         @foreach($pending_orders as $pending_row)
                                         <tr>
                                             <td>{{ $i++ }}</td>
+                                            <td>{{ $pending_row->name }}</td>
+                                            <td>{{ $pending_row->order_no }}</td>
                                             <td>{{ $pending_row->order_total }}</td>
                                             <td>
                                                 {{ $pending_row->payment_method }}
@@ -57,12 +62,8 @@
                                             </td>
 
                                             <td>
-                                                <a href="{{ url('order/edit_order/'.$pending_row->id) }}" title="Edit">
-                                                    <i style="font-size: 22px;" class="ti ti-pencil-alt"></i>
-                                                </a>
-                                                
-                                                <a href="{{ url('customer/draft_customer/'.$pending_row->id) }}" title="Draft" onclick="return confirm('Are you sure to delete Slider?')">
-                                                    <i style="font-size: 22px;margin-left: 10px;" class="ti ti-na"></i>
+                                                <a href="{{ url('orders/pending_orders_details/'.$pending_row->id) }}" title="Draft">
+                                                    <i style="font-size: 22px;margin-left: 10px;" class="ti ti-eye"></i>
                                                 </a>
                                             </td>
 

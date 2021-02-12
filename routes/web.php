@@ -12,7 +12,7 @@ Route::get('show_ourservice', 'FrontendController@show_ourservice');
 // User Profile route here
 // -----------------------HomeController route here-----------------------
 // Route::get('user_home', 'HomeController@userHome')->name('user.home');
-Route::get('user/home', 'HomeController@userHome')->name('user.home');
+Route::get('user.home', 'HomeController@userHome')->name('user.home');
 Route::get('user/user_edit/{id}', 'HomeController@editUser');
 Route::post('user/user_update/{id}', 'HomeController@updateUser');
 
@@ -134,10 +134,17 @@ Route::middleware('is_admin')->group(function (){
 	Route::get('customer/undraft_customer/{id}', 'admin\CustomerController@UnDraftCustomer');
 	Route::get('customer/delete_customer/{id}', 'admin\CustomerController@deleteCustomer');
 
-	// Customer route here
+	// Customer orderes route here
 	Route::get('orders/approved_orders', 'admin\OrderController@Approved_Order');
+	Route::get('orders/approved_orders_details/{id}', 'admin\OrderController@Approved_Order_Details');
+
 	Route::get('orders/pending_orders', 'admin\OrderController@Pending_Order');
-	Route::get('orders/order_details/{id}', 'admin\OrderController@Order_Details');
+	Route::get('orders/pending_orders_details/{id}', 'admin\OrderController@pending_orders_details');
+
+	Route::get('orders/approved_orders_status/{id}', 'admin\OrderController@approved_orders_status');
+	Route::get('orders/unapproved_orders/{order_no}', 'admin\OrderController@unapproved_order_status');
+	// Order invoice print
+	Route::get('orders/approved_orders_print/{id}', 'admin\OrderController@approved_order_print');
 
 	// Slider route here
 	Route::get('blog/all_blog', 'admin\BlogController@allBlog');

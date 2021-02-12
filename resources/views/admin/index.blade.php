@@ -1,5 +1,4 @@
 @extends('layouts.backapp')
-   
 @section('backend_content')
 <div class="pcoded-content">
     <div class="pcoded-inner-content">
@@ -14,8 +13,12 @@
                                 <div class="card-block">
                                     <div class="row align-items-end">
                                         <div class="col-8">
-                                            <h4 class="text-white">$30200</h4>
-                                            <h6 class="text-white m-b-0">All Earnings</h6>
+                                            @php
+                                                $all_products = DB::table('products')->where('status', 1)->count();
+                                            @endphp
+                                            <h4 class="text-white">{{ $all_products }} Products</h4>
+
+                                            <h6 class="text-white m-b-0">All Products</h6>
                                         </div>
                                         <div class="col-4 text-right">
                                             <canvas id="update-chart-1" height="50"></canvas>
@@ -23,7 +26,12 @@
                                     </div>
                                 </div>
                                 <div class="card-footer">
-                                    <p class="text-white m-b-0"><i class="feather icon-clock text-white f-14 m-r-10"></i>update : 2:15 am</p>
+                                    <p class="text-white m-b-0"><i class="feather icon-clock text-white f-14 m-r-10"></i>
+                                        @php
+                                            $get_last_date = DB::table('products')->where('status', 1)->orderBy('id', 'DESC')->first();
+                                        @endphp
+                                       Last inserted:  {{ $get_last_date->created_at }}
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -32,8 +40,11 @@
                                 <div class="card-block">
                                     <div class="row align-items-end">
                                         <div class="col-8">
-                                            <h4 class="text-white">290+</h4>
-                                            <h6 class="text-white m-b-0">Page Views</h6>
+                                            @php
+                                                $all_orders = DB::table('orders')->count();
+                                            @endphp
+                                            <h4 class="text-white">{{ $all_orders }} Orders</h4>
+                                            <h6 class="text-white m-b-0">All orders</h6>
                                         </div>
                                         <div class="col-4 text-right">
                                             <canvas id="update-chart-2" height="50"></canvas>
@@ -41,7 +52,16 @@
                                     </div>
                                 </div>
                                 <div class="card-footer">
-                                    <p class="text-white m-b-0"><i class="feather icon-clock text-white f-14 m-r-10"></i>update : 2:15 am</p>
+                                    <p class="text-white m-b-0">
+                                        <i class="feather icon-clock text-white f-14 m-r-10"></i>
+                                        @php
+                                            $get_last_date_order = DB::table('orders')->orderBy('id', 'DESC')->first();
+                                        @endphp
+
+                                        @if($get_last_date_order!=null)
+                                            Last inserted:  {{ $get_last_date_order->created_at }}
+                                        @endif
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -50,8 +70,11 @@
                                 <div class="card-block">
                                     <div class="row align-items-end">
                                         <div class="col-8">
-                                            <h4 class="text-white">145</h4>
-                                            <h6 class="text-white m-b-0">Task Completed</h6>
+                                            @php
+                                                $all_completed_orders = DB::table('orders')->where('status', 1)->count();
+                                            @endphp
+                                            <h4 class="text-white">{{ $all_completed_orders }} Cmplt</h4>
+                                            <h6 class="text-white m-b-0">Orders Completed</h6>
                                         </div>
                                         <div class="col-4 text-right">
                                             <canvas id="update-chart-3" height="50"></canvas>
@@ -59,7 +82,14 @@
                                     </div>
                                 </div>
                                 <div class="card-footer">
-                                    <p class="text-white m-b-0"><i class="feather icon-clock text-white f-14 m-r-10"></i>update : 2:15 am</p>
+                                    <p class="text-white m-b-0"><i class="feather icon-clock text-white f-14 m-r-10"></i>
+                                        @php
+                                            $get_last_date_order_complt = DB::table('orders')->where('status', 1)->orderBy('id', 'DESC')->first();
+                                        @endphp
+                                        @if($get_last_date_order_complt)
+                                       Last inserted:  {{ $get_last_date_order_complt->created_at }}
+                                       @endif
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -68,8 +98,16 @@
                                 <div class="card-block">
                                     <div class="row align-items-end">
                                         <div class="col-8">
-                                            <h4 class="text-white">500</h4>
-                                            <h6 class="text-white m-b-0">Downloads</h6>
+                                            @php
+                                                $total_earning_amount = 0;
+                                                $total_earning = DB::table('orders')->where('status', 1)->get();
+                                                
+                                            @endphp
+
+                                            @foreach($total_earning as $total_earn_row)
+                                            <h4 class="text-white">{{ $total_earning_amount += $total_earn_row->order_total }}</h4>
+                                            @endforeach
+                                            <h6 class="text-white m-b-0">Complted Total Earning</h6>
                                         </div>
                                         <div class="col-4 text-right">
                                             <canvas id="update-chart-4" height="50"></canvas>
@@ -77,7 +115,14 @@
                                     </div>
                                 </div>
                                 <div class="card-footer">
-                                    <p class="text-white m-b-0"><i class="feather icon-clock text-white f-14 m-r-10"></i>update : 2:15 am</p>
+                                    <p class="text-white m-b-0"><i class="feather icon-clock text-white f-14 m-r-10"></i>
+                                        @php
+                                            $get_last_date_order_complt_earning = DB::table('orders')->where('status', 1)->orderBy('id', 'DESC')->first();
+                                        @endphp
+                                         @if($get_last_date_order_complt_earning)
+                                       Last inserted:  {{ $get_last_date_order_complt_earning->created_at }}
+                                       @endif
+                                    </p>
                                 </div>
                             </div>
                         </div>

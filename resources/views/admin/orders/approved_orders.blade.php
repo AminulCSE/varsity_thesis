@@ -29,6 +29,8 @@
                                     <thead>
                                         <tr>
                                             <th>Sl No.</th>
+                                            <th>Customer Name</th>
+                                            <th>Order No</th>
                                             <th>Total Tk</th>
                                             <th>Payent type</th>
                                             <th>Status</th>
@@ -40,6 +42,8 @@
                                         @foreach($approved_orders as $approved_row)
                                         <tr>
                                             <td>{{ $i++ }}</td>
+                                            <td>{{ $approved_row->name }}</td>
+                                            <td>{{ $approved_row->order_no }}</td>
                                             <td>{{ $approved_row->order_total }}</td>
                                             <td>
                                                 {{ $approved_row->payment_method }}
@@ -55,12 +59,16 @@
                                             <span class="text-primary">Approved</span>
                                                 @endif
                                             </td>
+                                            {{$approved_row->id}}
 
 
                                             <td>
-
-                                                <a href="{{ url('orders/order_details/'.$approved_row->id) }}" title="Order Details">
+                                                <a href="{{ url('orders/approved_orders_details/'.$approved_row->id) }}" title="Order Details">
                                                     <i style="font-size: 22px;" class="ti ti-eye"></i>
+                                                </a>&nbsp;&nbsp;
+
+                                                <a target="_blank" href="{{ url('orders/approved_orders_print/'.$approved_row->id) }}" title="Order Details">
+                                                    <i style="font-size: 22px;" class="ti ti-printer"></i>
                                                 </a>
                                             </td>
                                         </tr>
