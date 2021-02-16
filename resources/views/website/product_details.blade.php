@@ -98,7 +98,7 @@
                                   </div><!-- /.stock-container -->
 
                                   <div class="description-container m-t-20">
-                                     {{ $product_details->description }}
+                                    {{ Str::limit($product_details->description, 500) }}
                                   </div><!-- /.description-container -->
 
                                   <div class="description-container m-t-20">

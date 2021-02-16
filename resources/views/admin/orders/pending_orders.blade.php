@@ -65,6 +65,10 @@
                                                 <a href="{{ url('orders/pending_orders_details/'.$pending_row->id) }}" title="Draft">
                                                     <i style="font-size: 22px;margin-left: 10px;" class="ti ti-eye"></i>
                                                 </a>
+
+                                                <a href="{{ url('orders/delete_order/'.$pending_row->id) }}" title="Draft">
+                                                    <i style="font-size: 22px;margin-left: 10px;" class="ti ti-trash"></i>
+                                                </a>
                                             </td>
 
                                         </tr>

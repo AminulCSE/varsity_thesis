@@ -117,7 +117,7 @@
                                             </div>
                                             <!-- /.product-price -->
                                             <div class="description m-t-10">
-                                                {{ $all_products->description }}
+                                                {{ Str::limit($all_products->description, 400) }}
                                             </div>
 
                                             <div class="cart clearfix animate-effect">

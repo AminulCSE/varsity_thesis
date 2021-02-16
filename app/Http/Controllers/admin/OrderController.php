@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\admin;
 use DB;
+use App\Order;
+use App\OrderDetails;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -144,5 +146,32 @@ class OrderController extends Controller
             $data['status'] = 0;
             $order_status = DB::table('orders')->where('order_no', $order_no)->update($data);
             return back()->with('message', 'Order Unapprvoed Successfully');
+        }
+
+// order delete
+        public function order_delete($id){
+            $get_payment_id = DB::table('orders')->where('id', $id)->first();
+
+
+            $order_details = DB::table('order_details')->where('order_id',$id)->get();
+            if(count($order_details)>1)
+            {
+                $order_get_id= [];
+                foreach ($order_details as $i)
+                {
+                    $order_get_id[] = $i->order_id;
+                }
+                for($i=0;$i<count($order_details);$i++)
+                {
+                    $get_order_d = DB::table('order_details')->where('order_id', $order_get_id)->delete();
+                }
+            }
+            elseif (count($order_details)==1)
+            {
+                $get_order_f = DB::table('order_details')->where('order_id', $order_get_id)->delete();
+            }
+
+
+            return back()->with('message', 'Order Deleted Successfully');
         }
 }

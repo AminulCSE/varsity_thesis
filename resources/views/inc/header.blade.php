@@ -294,7 +294,7 @@
                 <li class="dropdown hidden-sm {{ request()->is('all_products') ? 'active':'' }}"> <a href="{{ url('all_products') }}"> সকল প্রডাক্ট </a>
                 </li>
 
-                 <li class="dropdown"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">বাগানের ধরন <div class="fa fa-sort-desc"></div></a>
+                <!--  <li class="dropdown"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">বাগানের ধরন <div class="fa fa-sort-desc"></div></a>
                   <ul class="dropdown-menu pages">
                     <li>
                       <div class="yamm-content">
@@ -309,11 +309,11 @@
                       </div>
                     </li>
                   </ul>
-                </li>
+                </li> -->
 
                 <li class="dropdown hidden-sm {{ request()->is('show_ourservice') ? 'active':'' }}"> <a href="{{ url('show_ourservice') }}">আমাদের সম্পর্কে</a> </li>
-                <li class="dropdown hidden-sm"> <a href="{{ url('our_service') }}">হেল্প সেন্টার</a> </li>
 
+                <li class="dropdown hidden-sm {{ request()->is('user/contact_us') ? 'active':'' }}"> <a href="{{ url('user/contact_us') }}">যোগাযোগ করুন</a> </li>
               </ul>
               <!-- /.navbar-nav -->
               <div class="clearfix"></div>

@@ -133,14 +133,16 @@
                         <select class="form-control" name="payment_method" required="" id="payment_method">
                           <option selected="" disabled="">Select Payment Type</option>
                           <option value="Hand cash">Hand Cash</option>
+
                           <option onclick="showhide()" value="Bkash">Bkash</option>
+                          <option onclick="showhide()" value="Nagad">Nagad</option>
                         </select>
 
-                        <div id="show_field" style="display: none; margin-top: 20px;">
-                          <span style="color: green;">* Bkash No: 01787377982</span><br>
+                        <!-- id="show_field" -->
+                        <div style="/*display: none;*/ margin-top: 20px;">
+                          <span style="color: green;">* Bkash/Nagad Transaction No: 01787377982</span><br>
                           <input type="text" name="transaction_no"  class="form-control" placeholder="Enter Bkash Transction id">
                         </div><br>
-
                         <button type="submit" class="btn-upper btn btn-primary checkout-page-button">সাবমিট</button>
                       </form>
                     </div>
@@ -169,7 +171,7 @@ $('#payment_method').on('change', function () {
     if(this.value === "Bkash"){
         $("#show_field").show();
         $("#required").attr("required", true);
-    } else {
+    }else{
         $("#show_field").hide();
     }
 });

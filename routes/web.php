@@ -11,6 +11,8 @@ Route::get('show_ourservice', 'FrontendController@show_ourservice');
 
 // Product search
 Route::get('product_search', 'FrontendController@Product_Search');
+// Forum here
+Route::get('view_forum', 'FrontendController@view_forum');
 
 
 // User Profile route here
@@ -56,6 +58,9 @@ Route::get('order_list', 'PaymentController@orderList');
 Route::get('order_details/{id}', 'PaymentController@orderDetails');
 
 
+// Contact us by mail
+Route::get('user/contact_us', 'ContactController@contact_us');
+Route::post('user/send_contact', 'ContactController@save_contact');
 
 
 // -----------------------Backend route here------------------------->middleware('is_admin');
@@ -149,6 +154,8 @@ Route::middleware('is_admin')->group(function (){
 	Route::get('orders/unapproved_orders/{order_no}', 'admin\OrderController@unapproved_order_status');
 	// Order invoice print
 	Route::get('orders/approved_orders_print/{id}', 'admin\OrderController@approved_order_print');
+
+	Route::get('orders/delete_order/{id}', 'admin\OrderController@order_delete');
 
 	// Slider route here
 	Route::get('blog/all_blog', 'admin\BlogController@allBlog');

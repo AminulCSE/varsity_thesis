@@ -11,6 +11,11 @@ class FrontendController extends Controller
         return view('website');
     }
 
+    // Forum here
+    public function view_forum(){
+        return view('website.forum');
+    }
+
     // all product page to show all product in all_product page
     public function all_products(){
         $all_product = DB::table('products')->where('status', 1)->paginate(8);

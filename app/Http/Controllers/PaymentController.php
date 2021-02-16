@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 use Session;
 use DB;
@@ -25,44 +24,48 @@ class PaymentController extends Controller
 	        'payment_method' => 'required',
 	    	]);
 
-	    	if ($request->payment_method == 'Bkash' && $request->transaction_no==NULL) {
+	    	if($request->payment_method == 'Bkash' && $request->transaction_no==NULL) {
 	    		return redirect()->back()->with('error', 'Please insert Bkash Transaction Number!!');
-	    	}
-	    	DB::transaction(function()use($request){
-	    		$payment = new Payment();
-	    		$payment->payment_method = $request->payment_method;
-	    		$payment->transaction_no = $request->transaction_no;
-	    		$payment->save();
+	    	}elseif($request->payment_method == 'Nagad' && $request->transaction_no==NULL){
+                return redirect()->back()->with('error', 'Please insert Nagad Transaction Number!!');
+            }else{
+                DB::transaction(function()use($request){
+                $payment = new Payment();
+                $payment->payment_method = $request->payment_method;
+                $payment->transaction_no = $request->transaction_no;
+                $payment->save();
 
-	    		$order = new Order();
-	    		$order->user_id = Auth::user()->id;
-	    		$order->shipping_id = Session::get('shipping_id');
-	    		$order->payment_id = $payment->id;
+                $order = new Order();
+                $order->user_id = Auth::user()->id;
+                $order->shipping_id = Session::get('shipping_id');
+                $order->payment_id = $payment->id;
 
-	    		$order_data = Order::orderBy('id', 'DESC')->first();
-	    		if ($order_data == null) {
-	    			$firstReg = 0;
-	    			$order_no = $firstReg+1;
-	    		}else{
-	    			$order_data = Order::orderBy('id', 'DESC')->first()->order_no;
-	    			$order_no = $order_data+1;
-	    		}
-	    		$order->order_no = $order_no;
-	    		$order->order_total = $request->order_total;
-	    		$order->status = '0';
-	    		$order->save();
+                $order_data = Order::orderBy('id', 'DESC')->first();
+                if ($order_data == null) {
+                    $firstReg = 0;
+                    $order_no = $firstReg+1;
+                }else{
+                    $order_data = Order::orderBy('id', 'DESC')->first()->order_no;
+                    $order_no = $order_data+1;
+                }
+                $order->order_no = $order_no;
+                $order->order_total = $request->order_total;
+                $order->status = '0';
+                $order->save();
 
-	    		$contents = Cart::content();
-	    		foreach ($contents as $content) {
-	    			$order_details = new OrderDetails;
-	    			$order_details->order_id = $order->id;
-	    			$order_details->product_id = $content->id;
-	    			$order_details->size = $content->options->size;
-	    			$order_details->qty = $content->qty;
-	    			$order_details->save();
-	    		}
+                $contents = Cart::content();
+                foreach ($contents as $content) {
+                    $order_details = new OrderDetails;
+                    $order_details->order_id = $order->id;
+                    $order_details->product_id = $content->id;
+                    $order_details->size = $content->options->size;
+                    $order_details->qty = $content->qty;
+                    $order_details->save();
+                }
 
-	    	});
+            });
+            }
+	    	
     	}
 
     	Cart::destroy();
