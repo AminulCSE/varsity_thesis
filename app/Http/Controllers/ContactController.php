@@ -26,9 +26,7 @@ class ContactController extends Controller
         $contact->subject = $request->subject;
         $contact->phone_number = $request->phone_number;
         $contact->message = $request->message;
-
         $contact->save();
-        
         return back()->with('message', 'Thank you for contact us!');
     }
 }

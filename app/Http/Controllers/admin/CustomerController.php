@@ -43,7 +43,11 @@ class CustomerController extends Controller
 
 
 	public function deleteCustomer($id){
-	    $alldraftCustomer = DB::table('users')->where('is_admin', 0)->where('status',0)->delete();
+	    $alldraftCustomer = DB::table('users')
+                            ->where('is_admin', 0)
+                            ->where('status',0)
+                            ->where('id',$id)
+                            ->delete();
     	return redirect()->back()->with('message', 'Draft Customer Deleted Successfully');
     }
 

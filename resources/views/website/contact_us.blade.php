@@ -60,12 +60,12 @@
 
 
         </div><!-- /.row -->
-        
 
+        
         <br>
         <div class="row">
           <div class="col-md-12">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3018.1637085501866!2d90.37629381434952!3d23.807411892514327!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2sbd!4v1613445541976!5m2!1sen!2sbd" width="830" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d912.578456183429!2d90.37804771755845!3d23.807437073201864!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c72bcac0f4d1%3A0xba32cd2ad5f4f605!2sMirpur%2013%20Central%20Masjid!5e0!3m2!1sen!2sbd!4v1613734932295!5m2!1sen!2sbd" width="830" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
           </div>
         </div>
 
